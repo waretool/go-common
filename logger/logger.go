@@ -57,7 +57,7 @@ func Fatalf(format string, args ...interface{}) {
 }
 
 func Fatal(args ...interface{}) {
-	logger.Fatal(args)
+	logger.Fatal(args...)
 }
 
 func Errorf(format string, args ...interface{}) {
@@ -65,7 +65,7 @@ func Errorf(format string, args ...interface{}) {
 }
 
 func Error(args ...interface{}) {
-	logger.Error(args)
+	logger.Error(args...)
 }
 
 func Warnf(format string, args ...interface{}) {
@@ -73,7 +73,7 @@ func Warnf(format string, args ...interface{}) {
 }
 
 func Warn(args ...interface{}) {
-	logger.Warn(args)
+	logger.Warn(args...)
 }
 
 func Infof(format string, args ...interface{}) {
@@ -81,7 +81,7 @@ func Infof(format string, args ...interface{}) {
 }
 
 func Info(args ...interface{}) {
-	logger.Info(args)
+	logger.Info(args...)
 }
 
 func Debugf(format string, args ...interface{}) {
@@ -89,5 +89,5 @@ func Debugf(format string, args ...interface{}) {
 }
 
 func Debug(args ...interface{}) {
-	logger.Debug(args)
+	logger.Debug(args...)
 }
