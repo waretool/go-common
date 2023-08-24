@@ -1,5 +1,5 @@
 NAME ?= go-common
-VERSION ?= 0.0.0
+VERSION ?= 0.1.0
 
 .PHONY: version test coverage
 
