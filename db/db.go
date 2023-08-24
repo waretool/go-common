@@ -47,7 +47,7 @@ func createDatabase() Database {
 	dbPassword := env.GetEnv("DB_PASSWORD", "db-password")
 	dbHost := env.GetEnv("DB_HOST", "db-host")
 	dbPort := env.GetEnv("DB_PORT", "db-port")
-	dbSchema := env.GetEnv("DB_DATABASE", "db-schema")
+	dbSchema := env.GetEnv("DB_SCHEMA", "db-schema")
 
 	var connected = false
 	var err error
