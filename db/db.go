@@ -2,8 +2,8 @@ package db
 
 import (
 	"fmt"
-	"go-common/env"
-	"go-common/logger"
+	"github.com/waretool/go-common/env"
+	"github.com/waretool/go-common/logger"
 	"gorm.io/gorm/schema"
 	"time"
 

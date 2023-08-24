@@ -1,7 +1,7 @@
 package env
 
 import (
-	"go-common/logger"
+	"github.com/waretool/go-common/logger"
 	"os"
 	"strconv"
 )

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/suite"
-	"go-common/logger"
+	"github.com/waretool/go-common/logger"
 	"net/http"
 	"net/http/httptest"
 	"testing"

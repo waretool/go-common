@@ -3,7 +3,7 @@ package http
 import (
 	"fmt"
 	"github.com/go-resty/resty/v2"
-	"go-common/logger"
+	"github.com/waretool/go-common/logger"
 )
 
 const errorMessage = "error while sending http request %s %s due to: %s"

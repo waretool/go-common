@@ -2,7 +2,7 @@ package env
 
 import (
 	"github.com/stretchr/testify/suite"
-	"go-common/logger"
+	"github.com/waretool/go-common/logger"
 	"testing"
 )
 

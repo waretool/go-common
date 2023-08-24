@@ -3,8 +3,8 @@ package middleware
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	contextUtils "go-common/context"
-	"go-common/logger"
+	contextUtils "github.com/waretool/go-common/context"
+	"github.com/waretool/go-common/logger"
 	"slices"
 	"time"
 )
