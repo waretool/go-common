@@ -5,6 +5,8 @@ go 1.21.0
 require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-resty/resty/v2 v2.7.0
+	github.com/gorilla/mux v1.8.0
+	github.com/gwatts/gin-adapter v1.0.0
 	github.com/heptiolabs/healthcheck v0.0.0-20211123025425-613501dd5deb
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.8.4
