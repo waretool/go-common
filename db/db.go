@@ -77,7 +77,7 @@ func createDatabase() Database {
 		logger.Fatalf("connection pool cannot be set up due to: %s", err)
 	}
 
-	maxConnection := env.GetEnv("MYSQL_MAX_OPEN_CONN", 150)
+	maxConnection := env.GetEnv("DB_MAX_OPEN_CONN", 150)
 	sqlDB.SetMaxOpenConns(maxConnection)
 	sqlDB.SetMaxIdleConns(15)
 	sqlDB.SetConnMaxLifetime(time.Hour)
