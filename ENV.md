@@ -11,11 +11,11 @@
 | Env name         | default value | Available value | Description |
 |------------------|---------------|-----------------|-------------|
 | DB_HOST          | db-host       |                 |             |
-| DB_PORT          | db-host       |                 |             |
-| DB_USER          | db-host       |                 |             |
-| DB_PASSWORD      | db-host       |                 |             |
-| DB_SCHEMA        | db-host       |                 |             |
-| DB_CONN_RETRY    | db-host       |                 |             |
+| DB_PORT          | db-port       |                 |             |
+| DB_USER          | db-user       |                 |             |
+| DB_PASSWORD      | db-password   |                 |             |
+| DB_SCHEMA        | db-schema     |                 |             |
+| DB_CONN_RETRY    | 10            |                 |             |
 | DB_MAX_OPEN_CONN | 150           |                 |             |
 
 ## Logger
