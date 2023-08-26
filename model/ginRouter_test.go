@@ -31,5 +31,4 @@ func (suite *GinRouterSuite) TestUseMiddleware() {
 	ginRouter := NewGinRouter()
 	ginRouter.UseMiddleware(func(next http.Handler) http.Handler { return nil })
 	suite.Equal(2, len(ginRouter.RouterGroup.Handlers))
-
 }
