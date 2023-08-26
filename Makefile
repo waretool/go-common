@@ -8,4 +8,6 @@ version:
 
 test:
 	@echo "Running unit tests..."
-	@go test ./... -cover
+	@go test ./... -coverprofile cover.out
+	@echo "Coverage details:"
+	@go tool cover -func cover.out
