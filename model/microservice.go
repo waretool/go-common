@@ -25,11 +25,15 @@ func NewMicroservice(name string, router domain.Router) domain.Microservice {
 }
 
 func (m *microservice) Start() {
-	err := m.server.ListenAndServe()
-	if err != nil {
-		logger.Fatalf("unable to start microservice due to: %s", err)
-	}
-	logger.Infof("microservice %s started", m.name)
+	done := make(chan bool)
+	go func() {
+		err := m.server.ListenAndServe()
+		if err != nil {
+			logger.Fatalf("unable to start microservice due to: %s", err)
+		}
+	}()
+	logger.Infof("microservice %s started on %s", m.name, m.server.Addr)
+	<-done
 }
 
 func (m *microservice) GetName() string {
