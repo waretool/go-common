@@ -14,6 +14,15 @@ func init() {
 }
 
 func setLogFormat() {
+	hostname, _ := os.Hostname()
+
+	f := customFormatter{
+		additionalFields: map[string]string{
+			"name":     os.Getenv("APP_NAME"),
+			"hostname": hostname,
+		},
+	}
+
 	// do not use package env to avoid import cycle
 	environment, ok := os.LookupEnv("ENVIRONMENT")
 	if !ok {
@@ -21,10 +30,11 @@ func setLogFormat() {
 	}
 	switch environment {
 	case "production":
-		logger.SetFormatter(&logrus.JSONFormatter{})
+		f.formatter = &logrus.JSONFormatter{}
 	default:
-		logger.SetFormatter(&logrus.TextFormatter{})
+		f.formatter = &logrus.TextFormatter{FullTimestamp: true}
 	}
+	logger.SetFormatter(f)
 }
 
 func setLogLevel() {
