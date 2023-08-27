@@ -3,8 +3,8 @@ package middleware
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	contextUtils "github.com/waretool/go-common/context"
 	"github.com/waretool/go-common/logger"
+	"github.com/waretool/go-common/utils"
 	"slices"
 	"time"
 )
@@ -19,14 +19,14 @@ func LogMiddleware(skipPaths []string) gin.HandlerFunc {
 		if slices.Contains(skipPaths, ctx.Request.RequestURI) {
 			return
 		} else {
-			duration := contextUtils.GetDurationInMilliseconds(start)
+			duration := utils.GetDurationInMilliseconds(start)
 			cookie := ctx.GetHeader("Cookie")
 			if cookieLen := len(cookie); cookieLen > 0 {
 				cookie = cookie[:cookieLen/2] + "***"
 			}
 			logger.GetLogger().WithFields(logrus.Fields{
 				"request": map[string]interface{}{
-					"clientIp": contextUtils.GetClientIP(ctx),
+					"clientIp": utils.GetClientIp(ctx.Request),
 					"method":   ctx.Request.Method,
 					"path":     ctx.Request.RequestURI,
 					"headers": map[string]interface{}{
