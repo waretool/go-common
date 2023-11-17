@@ -29,27 +29,29 @@ func (suite *LoggerSuite) TestLoggerDefaultFormat() {
 	hostname, _ := os.Hostname()
 	expected := customFormatter{
 		additionalFields: map[string]string{
-			"name":     os.Getenv("APP_NAME"),
+			"app":      os.Getenv("APP_NAME"),
+			"env":      "production",
 			"hostname": hostname,
 		},
-		formatter: &logrus.TextFormatter{FullTimestamp: true},
+		formatter: &logrus.JSONFormatter{},
 	}
 
 	logFormatter := logger.Formatter
 	suite.Equal(expected, logFormatter)
 }
 
-func (suite *LoggerSuite) TestLoggerJsonFormat() {
-	suite.T().Setenv("ENVIRONMENT", "production")
+func (suite *LoggerSuite) TestLoggerTextFormat() {
+	suite.T().Setenv("ENVIRONMENT", "development")
 	setLogFormat()
 
 	hostname, _ := os.Hostname()
 	expected := customFormatter{
 		additionalFields: map[string]string{
-			"name":     os.Getenv("APP_NAME"),
+			"app":      os.Getenv("APP_NAME"),
+			"env":      "development",
 			"hostname": hostname,
 		},
-		formatter: &logrus.JSONFormatter{},
+		formatter: &logrus.TextFormatter{FullTimestamp: true},
 	}
 
 	logFormatter := logger.Formatter

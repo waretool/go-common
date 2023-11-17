@@ -4,7 +4,7 @@
 
 | Env name       | Default value | Available value         | Description                                                          |
 |----------------|---------------|-------------------------|----------------------------------------------------------------------|
-| ENVIRONMENT    | development   | production, development | This is env is for general purpose but affect the log format to json |
+| ENVIRONMENT    | production    | production, development | This is env is for general purpose but affect the log format to json |
 | APP_NAME       |               |                         | This is env is used in some log info and as jwt audience fields      |
 | JWT_EXP_TIME   | 900           |                         | JWT expiration time in seconds                                       |
 | JWT_SECRET_KEY |               |                         | MANDATORY                                                            |

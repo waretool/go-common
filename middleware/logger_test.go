@@ -27,7 +27,7 @@ func (suite *LoggerSuite) TestLogger() {
 	_, r := gin.CreateTestContext(w)
 	r.Use(LogMiddleware([]string{}))
 
-	r.GET("/somePath", func(ctx *gin.Context) {
+	r.GET("/some-path", func(ctx *gin.Context) {
 		ctx.String(http.StatusOK, "the request has matched pattern (website)")
 	})
 
@@ -35,16 +35,16 @@ func (suite *LoggerSuite) TestLogger() {
 	buf := bytes.Buffer{}
 	logger.GetLogger().SetOutput(&buf)
 
-	req := httptest.NewRequest(http.MethodGet, "/somePath", nil)
+	req := httptest.NewRequest(http.MethodGet, "/some-path", nil)
 	req.Header = http.Header{
 		"Content-Type": {"application/json"},
 		"Connection":   {"keep-alive"},
-		"Cookie":       {"soc-session=***"},
+		"Cookie":       {"some-cookie=***"},
 	}
 
 	r.ServeHTTP(w, req)
 
-	regex := `time=".*" level=info duration=.* request="map\[clientIp:.* headers:map\[connection:keep-alive content-type:application/json cookie:soc-ses\*\*\* host:example\.com user-agent:\] method:GET path:/somePath\]" status=200`
+	regex := `"app":"","duration".*,"env":"production","hostname":".*","level":"info","msg":"","request":\{"clientIp":".*","headers":\{"connection":"keep-alive","content-type":"application/json","cookie":"some-co\*\*\*","host":"example.com","user-agent":""\},"method":"GET","path":"/some-path"\},"status":200,"time":".*"`
 
 	suite.Regexp(regex, buf.String())
 	// restore log target

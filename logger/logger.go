@@ -16,18 +16,20 @@ func init() {
 func setLogFormat() {
 	hostname, _ := os.Hostname()
 
+	// do not use package env to avoid import cycle
+	environment, ok := os.LookupEnv("ENVIRONMENT")
+	if !ok {
+		environment = "production"
+	}
+
 	f := customFormatter{
 		additionalFields: map[string]string{
-			"name":     os.Getenv("APP_NAME"),
+			"app":      os.Getenv("APP_NAME"),
+			"env":      environment,
 			"hostname": hostname,
 		},
 	}
 
-	// do not use package env to avoid import cycle
-	environment, ok := os.LookupEnv("ENVIRONMENT")
-	if !ok {
-		environment = "development"
-	}
 	switch environment {
 	case "production":
 		f.formatter = &logrus.JSONFormatter{}
