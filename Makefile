@@ -1,12 +1,12 @@
 NAME ?= go-common
 VERSION ?= 0.7.0
 
-.PHONY: version test coverage
+.PHONY: version tests
 
 version:
 	@echo $(VERSION)
 
-test:
+tests:
 	@echo "Running unit tests..."
 	@go test ./... -coverprofile cover.out
 	@echo "Coverage details:"
