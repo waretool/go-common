@@ -16,4 +16,4 @@ jobs:
         go-version: '1.21.x'
 
     - name: Running tests
-      run: make test
+      run: make tests
