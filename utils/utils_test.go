@@ -81,3 +81,24 @@ func (suite *UtilSuite) TestGetDuration() {
 	logger.Info(duration)
 	suite.LessOrEqual(duration, float64(1003))
 }
+
+func (suite *UtilSuite) TestToSnakeCase() {
+	var tests = []struct {
+		variable string
+		expected string
+	}{
+		{
+			"hello world",
+			"hello world",
+		},
+		{
+			"HelloWorld",
+			"hello_world",
+		},
+	}
+
+	for _, test := range tests {
+		result := ToSnakeCase(test.variable)
+		suite.Equal(test.expected, result)
+	}
+}

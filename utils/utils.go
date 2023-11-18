@@ -3,6 +3,7 @@ package utils
 import (
 	"github.com/waretool/go-common/env"
 	"net/http"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -35,4 +36,12 @@ func GetDurationInMilliseconds(start time.Time) float64 {
 	milliseconds := float64(duration) / float64(time.Millisecond)
 	rounded := float64(int(milliseconds*100+.5)) / 100
 	return rounded
+}
+
+func ToSnakeCase(str string) string {
+	var matchFirstCap = regexp.MustCompile("(.)([A-Z][a-z]+)")
+	var matchAllCap = regexp.MustCompile("([a-z0-9])([A-Z])")
+	snake := matchFirstCap.ReplaceAllString(str, "${1}_${2}")
+	snake = matchAllCap.ReplaceAllString(snake, "${1}_${2}")
+	return strings.ToLower(snake)
 }
