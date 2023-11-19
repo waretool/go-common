@@ -5,7 +5,6 @@ import (
 	"github.com/waretool/go-common/env"
 	"github.com/waretool/go-common/logger"
 	"gorm.io/driver/postgres"
-	"gorm.io/gorm/schema"
 	"time"
 
 	"github.com/heptiolabs/healthcheck"
@@ -54,10 +53,8 @@ func createDatabase() Database {
 	dsn := fmt.Sprintf("user=%s password=%s host=%s port=%s dbname=%s sslmode=disable TimeZone=UTC", dbUser, dbPassword, dbHost, dbPort, dbSchema)
 	for i := 0; !connected && i < retry; i++ {
 		db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
-			Logger: gormLogger.Default.LogMode(gormLogger.Silent),
-			NamingStrategy: schema.NamingStrategy{
-				NoLowerCase: true,
-			},
+			Logger:         gormLogger.Default.LogMode(gormLogger.Silent),
+			TranslateError: true,
 		})
 		if err != nil {
 			logger.Errorf("cannot connect to db '%s'. attempt number %d of %d failed.", dbSchema, i+1, retry)
