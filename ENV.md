@@ -23,6 +23,7 @@
 
 ## Logger
 
-| Env name     | default value | Available value          | Description                                      |
-|--------------|---------------|--------------------------|--------------------------------------------------|
-| LOGGER_LEVEL | debug         | debug, info, warn, error | if provided wrong value, info level will be used |
+| Env name      | default value | Available value          | Description                                       |
+|---------------|---------------|--------------------------|---------------------------------------------------|
+| LOGGER_LEVEL  | debug         | debug, info, warn, error | if provided wrong value, info level will be used  |
+| LOGGER_FORMAT | json          | json, text               | if provided wrong value, json format will be used |

@@ -17,6 +17,12 @@ func setLogFormat() {
 	hostname, _ := os.Hostname()
 
 	// do not use package env to avoid import cycle
+	format, ok := os.LookupEnv("LOGGER_FORMAT")
+	if !ok {
+		format = "json"
+	}
+
+	// do not use package env to avoid import cycle
 	environment, ok := os.LookupEnv("ENVIRONMENT")
 	if !ok {
 		environment = "production"
@@ -30,8 +36,8 @@ func setLogFormat() {
 		},
 	}
 
-	switch environment {
-	case "production":
+	switch format {
+	case "json":
 		f.formatter = &logrus.JSONFormatter{}
 	default:
 		f.formatter = &logrus.TextFormatter{FullTimestamp: true}
