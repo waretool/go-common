@@ -41,14 +41,14 @@ func (suite *LoggerSuite) TestLoggerDefaultFormat() {
 }
 
 func (suite *LoggerSuite) TestLoggerTextFormat() {
-	suite.T().Setenv("ENVIRONMENT", "development")
+	suite.T().Setenv("LOGGER_FORMAT", "text")
 	setLogFormat()
 
 	hostname, _ := os.Hostname()
 	expected := customFormatter{
 		additionalFields: map[string]string{
 			"app":      os.Getenv("APP_NAME"),
-			"env":      "development",
+			"env":      "production",
 			"hostname": hostname,
 		},
 		formatter: &logrus.TextFormatter{FullTimestamp: true},
@@ -123,4 +123,99 @@ func (suite *LoggerSuite) TestFatalf() {
 
 	suite.Equal(true, isOsExitCalled)
 	suite.Contains(buf.String(), "this is the fatal message")
+}
+
+func (suite *LoggerSuite) TestFatal() {
+	var buf bytes.Buffer
+	logger.SetOutput(&buf)
+	defer func() { logger.SetOutput(os.Stderr) }()
+
+	isOsExitCalled := false
+	defer func() { logger.ExitFunc = nil }()
+	logger.ExitFunc = func(int) { isOsExitCalled = true }
+
+	Fatal("this is the fatal message")
+
+	suite.Equal(true, isOsExitCalled)
+	suite.Contains(buf.String(), "this is the fatal message")
+}
+
+func (suite *LoggerSuite) TestErrorf() {
+	var buf bytes.Buffer
+	logger.SetOutput(&buf)
+	defer func() { logger.SetOutput(os.Stderr) }()
+
+	Errorf("this is the error message")
+
+	suite.Contains(buf.String(), "this is the error message")
+}
+
+func (suite *LoggerSuite) TestError() {
+	var buf bytes.Buffer
+	logger.SetOutput(&buf)
+	defer func() { logger.SetOutput(os.Stderr) }()
+
+	Error("this is the error message")
+
+	suite.Contains(buf.String(), "this is the error message")
+}
+
+func (suite *LoggerSuite) TestWarnf() {
+	var buf bytes.Buffer
+	logger.SetOutput(&buf)
+	defer func() { logger.SetOutput(os.Stderr) }()
+
+	Warnf("this is the warn message")
+
+	suite.Contains(buf.String(), "this is the warn message")
+}
+
+func (suite *LoggerSuite) TestWarn() {
+	var buf bytes.Buffer
+	logger.SetOutput(&buf)
+	defer func() { logger.SetOutput(os.Stderr) }()
+
+	Warn("this is the warn message")
+
+	suite.Contains(buf.String(), "this is the warn message")
+}
+
+func (suite *LoggerSuite) TestInfof() {
+	var buf bytes.Buffer
+	logger.SetOutput(&buf)
+	defer func() { logger.SetOutput(os.Stderr) }()
+
+	Infof("this is the info message")
+
+	suite.Contains(buf.String(), "this is the info message")
+}
+
+func (suite *LoggerSuite) TestInfo() {
+	var buf bytes.Buffer
+	logger.SetOutput(&buf)
+	defer func() { logger.SetOutput(os.Stderr) }()
+
+	Info("this is the info message")
+
+	suite.Contains(buf.String(), "this is the info message")
+}
+
+func (suite *LoggerSuite) TestDebugf() {
+	var buf bytes.Buffer
+	logger.SetOutput(&buf)
+	defer func() { logger.SetOutput(os.Stderr) }()
+
+	Debugf("this is the debug message")
+
+	suite.Contains(buf.String(), "this is the debug message")
+}
+
+func (suite *LoggerSuite) TestDebug() {
+	var buf bytes.Buffer
+	logger.SetOutput(&buf)
+	defer func() { logger.SetOutput(os.Stderr) }()
+
+	Debug("this is the debug message")
+
+	suite.Contains(buf.String(), "this is the debug message")
 }
